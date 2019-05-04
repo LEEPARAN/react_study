@@ -47,6 +47,9 @@ graph.draw(); // my-module.js의 draw 메소드를 호출할 수 있다.
 console.log(cube(3)); // my-module.js의 cube 함수를 실행할 수 있다.
 console.log(foo); // my-module.js의 foo 변수를 호출할 수 있다.
 ```
+
+<hr/>
+
 #### - JSX의 기본 문법 & 규칙
 
 ##### JSX란?
