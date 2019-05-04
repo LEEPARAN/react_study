@@ -85,10 +85,10 @@ import React, { Component } from 'react';
 
 class App extends Compoent {
   render() {
-    return {
+    return (
       <div>Hello</div>
       <div>Bye</div>
-    }
+    )
   }
 }
 ```
@@ -102,12 +102,12 @@ import React, { Component } from 'react';
 
 class App extends Compoent {
   render() {
-    return {
+    return (
       <div>
         <div>Hello</div>
         <div>Bye</div>
       </div>
-    }
+    )
   }
 }
 ```
@@ -122,12 +122,12 @@ import React, { Component, Fragment } from 'react';
 
 class App extends Compoent {
   render() {
-    return {
+    return (
       <Fragment>
         <div>Hello</div>
         <div>Bye</div>
       </Fragment>
-    }
+    )
   }
 }
 ```
@@ -143,9 +143,9 @@ import React, { Component } from 'react';
 class App extends Compoent {
   render() {
     const name = 'react';
-    return {
+    return (
       <div>Hello {name}!</div>
-    }
+    )
   }
 }
 ```
@@ -156,13 +156,13 @@ import React, { Component } from 'react';
 
 class App extends Compoent {
   render() {
-    return {
+    return (
       <div>
       {
         1 + 1 === 2 ? (<div>맞아요!</div>): (<div>틀려요!</div>)
       }
       </div>
-    }
+    )
   }
 }
 ```
@@ -174,13 +174,13 @@ import React, { Component } from 'react';
 class App extends Compoent {
   render() {
     const name = 'velopert';
-    return {
+    return (
       <div>
       {
         name === 'velopert!' && <div>밸로퍼트다!</div>
       }
       </div>
-    }
+    )
   }
 }
 ```
@@ -192,7 +192,7 @@ import React, { Component } from 'react';
 class App extends Compoent {
   render() {
     const value = 1;
-    return {
+    return (
       <div>
       {
         (function() {
@@ -203,13 +203,89 @@ class App extends Compoent {
         })() // 여기 세미콜론 작성하면 에러
       }
       </div>
-    }
+    )
   }
 }
 ```
 
+##### JSX에서 스타일 사용하기
 
+JSX에서 style을 사용하고자 한다면 객체로 만들어서 사용해야한다.
+스타일 속성명은 기존의 스타일 작성법인 단어마다 -(dash)를 사용하는 것과 달리
+camelCase(낙타 표기법)를 사용하며 속성값은 String으로 작성하며 수치까지 전부 표기한다.
 
+###### EXAMPLE
+```
+import React, { Component } from 'react';
 
+class App extends Compoent {
+  render() {
+    const style = {
+      backgroundColor: 'black',
+      padding: '16px',
+      color: 'white',
+      fontSize: '36px'
+    }
+    return <div style={style}>리액트가 최고야</div>
+  }
+}
+```
 
+##### JSX에서 클래스 사용하기
 
+JSX에서 클래스명을 작성할 경우 속성명에 기존 HTML과 같이 class가 아닌 className으로 작성을 해야한다.
+이전에는 class라고 작성했을 때 동작하지 않았으나 버젼업이 진행 된 현재는 class로 작성해도 동작하지만
+className으로 작성하는 것이 올바른 컨벤션이니 className으로 작성해주도록 하자.
+
+css는 import로 불러오면되며 속성값은 {} 안에 넣어주면 된다.
+
+###### EXAMPLE
+```
+// App.css
+.App {
+  background: black;
+  color: aqua;
+  font-size: 36px;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+// App.js
+import React, { Component } from 'react';
+import './App.css';
+
+class App extends Compoent {
+  render() {
+    return <div className={App}>리액트가 최고야</div>
+  }
+}
+```
+
+##### JSX에서 주석 사용하기
+
+예제를 보면 이해하기 쉽게 작성되었다.
+JSX 외부에서의 주석은 기존 자바스크립트와 동일하니
+JSX 내부에서 태그 밖과 태그 안에 작성하고자 할때의 차이를 이해하면 편할 것이다.
+
+###### EXAMPLE
+```
+import React, { Component } from 'react';
+import './App.css';
+
+class App extends Compoent {
+  render() {
+    // JSX 밖에선 이렇게 편하게 작성하면 된다.
+    return (
+      // 여기까진 JSX 밖이다.
+      <div className="App">
+         {/* JSX안에선 주석은 멀티라인으로 작성하되 중괄호로 감싸줘야 한다. */}
+        <h1
+          example="reactBest" // 태그 내부에 주석을 작성하고 싶다면 이렇게 작성해야 한다.
+        >
+          리액트가 최고야!
+        </h1>
+      </div>
+    )
+  }
+}
+```
