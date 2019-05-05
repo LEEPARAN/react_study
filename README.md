@@ -289,3 +289,55 @@ class App extends Compoent {
   }
 }
 ```
+
+#### ES6 Class
+
+ES6에서 새롭게 Class라는 것이 나왔는데 자바나 C++ 등 프로그래밍 언어에서 클래스는 이미 많이 사용되고 있었다
+괜시리 사용해보지 않은 것이라 일단 겁부터 먹었는데 MDN의 예제코드를 따라서 작성해보니 기존 Javascript의
+prototype과 사용 방식이 같았다. 물론 완전히 같다고 볼 수는 없지만 매우 비슷한 형태를 띄었다.
+
+###### EXAMPLE
+```
+// ES6 Class
+class Number {
+	constructor(a, b) {
+		this.a = a;
+		this.b = b;
+	}
+
+	sum() {
+		console.log(this.a + this.b);
+	}
+}
+
+var p = new Number(1, 2);
+p.sum(); // 3
+```
+
+##### Extends
+
+React 강의를 보다보면 자꾸 class sum extends Number { ... }와 같은 형태의 코드가 나온다.
+도대체 이놈의 정체란 무엇인가? 솔직히 이 부분이 궁금해서 Github에 Class 관련 글을 작성하였다.
+extends 키워드는 클래스 선언이나 클래스 표현식에서 다른 클래스의 자식 클래스를 생성하기 위해 사용된다고 한다.
+
+예제를 본 후 글을 이어가도록하자.
+
+###### EXAMPLE
+```
+import React, { Component } from 'react';
+import MyName from './MyName';
+
+class App extends Component {
+  render() {
+    return <MyName name="리액트" />;
+  }
+}
+```
+
+위 코드를 보면 불러온 react에서 Component 클래스를 불러왔고
+아래엔 직접 선언한 App 클래스를 extends하여 Component 라는 상위 클래스에 연장했다고 보면 될 것 같다.
+
+솔직히 아직 활용방법이나 이런 부분에 대해선 잘 모르겠고 그냥 이렇구나 하고 넘어가도록 해야겠다.
+
+
+
