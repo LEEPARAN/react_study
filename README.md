@@ -339,5 +339,37 @@ class App extends Component {
 
 솔직히 아직 활용방법이나 이런 부분에 대해선 잘 모르겠고 그냥 이렇구나 하고 넘어가도록 해야겠다.
 
+##### Static
+
+Class Extends와 같이 많이 나오는 것중 하나가 Class static이다.
+용도는 Class의 정적 메소드를 사용할 때 static 키워드를 사용하며, 정적 메소드는 클래스의 인스턴스가 아닌
+클래스의 이름으로 호출한다. 따라서 클래스의 인스턴스를 생성하지 않아도 호출할 수 있다.
+
+```
+Class Foo {
+  constructor(prop) {
+    this.prop = prop;
+  }
+  
+  static staticMethod() {
+    return 'staticMethod';
+  }
+
+  prototypeMethod() {
+    return this.prop;
+  }
+}
+
+console.log(Foo.staticMethod()); // staticMethod
+
+const foo = new Foo(123);
+
+console.log(foo.staticMethod()); // Uncaught TypeError: foo.static...
+```
+
+위 결과와 같이 클래스의 정적 메소드는 인스턴스로 호출할 수 없으며 
+이것은 정적 메소드는 this를 사용할 수 없다는 것을 의미한다.
+
+왜 정적 메소드는 클래스의 이름으로 호출하며 왜 static이 필요한 지에 대해서는 후에 알아보도록 하자.
 
 
