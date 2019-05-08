@@ -372,4 +372,116 @@ console.log(foo.staticMethod()); // Uncaught TypeError: foo.static...
 
 왜 정적 메소드는 클래스의 이름으로 호출하며 왜 static이 필요한 지에 대해서는 후에 알아보도록 하자.
 
+#### Props
+
+velopert 강사님은 Props가 너무너무너무 중요하다고 하였다. 그만큼 중요한 강의인만큼 열심히 듣고 최대한 쉽게 이해하려고 하였다.
+
+```
+// App.js
+import React, { Component } from 'react';
+import MyName from './MyName'
+
+class App extends Component {
+  render() {
+    return <MyName name="REACT" />
+  }
+}
+
+export default App;
+
+// MyName.js
+
+import React, { Component } from 'react';
+
+class MyName extends Component {
+  static defaultProps = {
+    name: '기본이름'
+  }
+  render() {
+    return <div>안녕 내 이름은 <b>{this.props.name}</b> 라고해!</div>
+  }
+}
+
+export default MyName;
+
+// 결과: 안녕 내 이름은 REACT 라고해!
+```
+
+Props라는 것은 부모가 자식에게 값을 일방적으로 전달해주는 읽기형식이다.
+부모 컴포넌트에서 자식 컴포넌트로 값을 전달해주고자 할 때 App 클래스의 return 값처럼 ???="???" 다와 같은 형태로 전달을 한다.
+여기서 props라고 하는 것이 name 객체의 value "REACT"를 가져와서 넣어준다.
+라고 생각하면 기능적인면에서는 끝내면 될 것 같다.
+
+추가로 static defaultProps라는 것이 있는데 이부분은 부모 컴포넌트에서 props 값 전달을 까먹어 <MyName /> 같은 현상이 생길 경우
+해당 값에 default로 defaultProps의 값이 전달되어 들어간다.
+
+#### State
+
+State 또한 매우 중요하다 Props와 다른 차이점이 있다면 Props가 부모 컴포넌트에서 자식 컴포넌트로의 일방적인 읽기 형태의 데이터를
+전달만 하였다면 State는 한 컴포넌트에서 데이터를 가지고 있으며 수정을 하고자 하면 수정 또한 가능하다는 점이다.
+
+어떻게 돌아가는지와 수정 방법에 대해서는 코드를 통해 확인하도록 하자.
+
+```
+// App.js
+import React, { Component } from 'react';
+import Counter from './Counter'
+
+class App extends Component {
+  render() {
+    return <Counter />
+  }
+}
+
+export default App;
+
+// Counter.js
+import React, { Component } from 'react';
+
+class Counter extends Component {
+  state = {
+    number: 0
+  }
+  
+  handleIncrease = () => {
+    this.setState({
+	number: this.state.number + 1
+    });
+  }
+  
+  handleDecrease = () => {
+    this.setState({
+	number: this.state.number - 1
+    });
+  }
+  
+  render() {
+    return (
+      <div>
+        <h1>카운터</h1>
+        <p>숫자: {this.state}</p>
+        <button onClick={this.handleIncrease}>+</button>
+        <button onClick={this.handleDecrease}>-</button>
+      </div>
+    )
+  }
+}
+
+export default Counter;
+```
+
+아까전에 State는 한 컴포넌트 안에서 데이터를 보내고 수정하는 작업들을 진행한다고 하였다.
+App 클래스를 확인해보면 별 다른 내용이 존재하지는 않는다. 단지 render 메소드에서 return에서 Counter를 Self-Closing-Tag로 생성하였을 뿐이다.
+나머지는 전부 Counter 클래스에서 전부 해결한다.
+
+상단의 state에는 문자열, 숫자열이 들어가면 안되고 무조건 객체로 값이 들어가야한다.
+그리고 this.setState({ ... })를 활용해서 값을 저장해주어야한다. 만약 이 과정을 거치지않고 단독적으로 this.state.number + 1 이런식으로
+진행할 경우 Component에서 값을 기억하지 못해서 setState를 활용해주는 것이다.
+
+부르고자 하는 것들은 같은 클래스 안에있는 this로 부르면 될 것 같고 나머지 onClick 같은 것들은 배우면 또 금세 알게 될 것 같다.
+
+
+
+
+
 
